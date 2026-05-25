@@ -4,7 +4,13 @@ import os
 
 # --- 1. 配置你的 API 密钥 ---
 try:
-    client = genai.Client(api_key="AIzaSyAlDVcIBVpxbpRSrRnLUyFn9V08Z96UPmc") 
+    api_key = os.getenv("GOOGLE_API_KEY")
+
+    if not api_key:
+        print("未找到环境变量 GOOGLE_API_KEY")
+        exit()
+
+    client = genai.Client(api_key=api_key) 
 except Exception as e:
     print(f"API 密钥配置或客户端创建失败: {e}")
     print("请确保你已经将 'YOUR_API_KEY' 替换为你的真实密钥。")
